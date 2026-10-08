@@ -12,10 +12,10 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '18'
 
@@ -29,13 +29,13 @@ jobs:
       run: npx playwright install --with-deps chromium
 
     - name: Start Mock Server
-      run: npm start &
+      run: node server.js &
       
     - name: Wait for Server to Boot
       run: sleep 3
 
     - name: Run Playwright E2E Tests
-      run: npm test
+      run: npx playwright test
 
     - name: Upload Playwright Report
       if: always()
